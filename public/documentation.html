@@ -41,7 +41,7 @@
           <td>GET</td>
           <td>/movies/genre/Thriller</td>
           <td>
-            A JSON object containing data of all movies with selected genre
+            A JSON object describing the selected genre
           </td>
         </tr>
         <tr>
@@ -55,47 +55,67 @@
         </tr>
         <tr>
           <td>Allow new users to register</td>
-          <td>/[user]</td>
+          <td>/users</td>
           <td>POST</td>
-          <td>/izanko</td>
-          <td>New user [User] has registered. Welcome!</td>
+          <td>
+            /users <br />
+            Expecting: (JSON)<br />
+            { Username, Password, Email }
+          </td>
+          <td>a JSON object containing registered user's data</td>
+        </tr>
+        <tr>
+          <td>Display a user's data by username</td>
+          <td>/users/[username]</td>
+          <td>GET</td>
+          <td>/users/noah</td>
+          <td>a JSON object containing user's data</td>
         </tr>
         <tr>
           <td>Allow users to update their user info (username)</td>
-          <td>/[user]</td>
+          <td>/users/[username]</td>
           <td>PUT</td>
-          <td>/izanko</td>
-          <td>Your new username is [username]</td>
+          <td>
+            /users/noah <br />
+            Expecting: (JSON)<br />
+            { Username, Password, Email, Birthday }
+          </td>
+          <td>a JSON object displaying updated user information</td>
         </tr>
         <tr>
           <td>Return a list of user's favorite movies</td>
-          <td>/username/favorites</td>
+          <td>/users/[username]/favorites</td>
           <td>GET</td>
-          <td>/username/favorites</td>
-          <td>A JSON object containing data of all favorited movies</td>
+          <td>/users/noah/favorites</td>
+          <td>A JSON object containing IDs of all favorited movies</td>
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/[user]/favorites/[title]</td>
+          <td>/users/[user]/movies/[movie ID]</td>
           <td>POST</td>
-          <td>/izanko/favorites/The Dark Knight</td>
-          <td>Movie [title] was added to your favorites</td>
+          <td>/users/noah/movies/6113ff9d25e193d77c0c491e</td>
+          <td>
+            A JSON object containing the user's information including his/her
+            favorited movies
+          </td>
         </tr>
         <tr>
           <td>Allow users to remove a movie from their list of favorites</td>
-          <td>/[user]/favorites/[title]</td>
+          <td>/users/[user]/movies/[movie ID]</td>
           <td>DELETE</td>
-          <td>/izanko/favorites/The Dark Knight</td>
-          <td>Movie [title] was removed from your favorites</td>
+          <td>/users/noah/movies/6113ff9d25e193d77c0c491e</td>
+          <td>
+            A JSON object containing the user's information including his/her
+            favorited movies
+          </td>
         </tr>
         <tr>
           <td>Allow existing users to deregister</td>
-          <td>/[user]</td>
+          <td>/users/[user]</td>
           <td>DELETE</td>
-          <td>/izanko</td>
+          <td>users/noah</td>
           <td>
-            Your email [email] and username [username] have been removed from
-            our records
+            [username] was deleted.
           </td>
         </tr>
       </table>
