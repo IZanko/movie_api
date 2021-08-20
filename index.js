@@ -28,6 +28,7 @@ const app = express();
 app.use(bodyParser.json());
 
 /*Setting up Cross Origins Resource (CORS) sharing*/
+let cors = require("cors");
 let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
 app.use(
   cors({
