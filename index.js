@@ -7,6 +7,8 @@ const Models = require("./models.js");
 /*Movies and Users refer to model names created in models.js*/
 const Movies = Models.Movie;
 const Users = Models.User;
+/*require CORS*/
+const cors = require("cors");
 
 /*connect mongoose to the local database myFlixDB*/
 /*mongoose.connect("mongodb://localhost:27017/myFlixDB", {
