@@ -1,5 +1,7 @@
 /*jshint esversion: 6*/
 const mongoose = require("mongoose");
+/*initialize hashing for use on sensitive data*/
+const bcrypt = require("bcrypt");
 
 let movieSchema = mongoose.Schema({
   Title: { type: String, required: true },
@@ -23,6 +25,15 @@ let userSchema = mongoose.Schema({
   Birthday: Date,
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
 });
+
+/*hashes all submitted passwords*/
+userSchema.statics.hashPassword = password => {
+  return bcrypt.hashSync(password, 10);
+};
+/*compares submitted hashed passwords with the hashed passwords stored in the database*/
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.Password);
+};
 
 let Movie = mongoose.model("Movie", movieSchema);
 let User = mongoose.model("User", userSchema);
