@@ -72,40 +72,52 @@ app.get(
 );
 
 // Return data about a single movie by title to the user
-app.get("/movies/:title", (req, res) => {
-  Movies.findOne({ Title: req.params.title })
-    .then(movie => {
-      res.json(movie);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+app.get(
+  "/movies/:title",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.findOne({ Title: req.params.title })
+      .then(movie => {
+        res.json(movie);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 // Return data about a genre (e.g.,“Thriller”)
-app.get("/movies/genre/:genre", (req, res) => {
-  Movies.findOne({ "Genre.Name": req.params.genre })
-    .then(movie => {
-      res.json(movie.Genre);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+app.get(
+  "/movies/genre/:genre",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.findOne({ "Genre.Name": req.params.genre })
+      .then(movie => {
+        res.json(movie.Genre);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 // Return data about a director (bio, birth year, death year) by name
-app.get("/movies/directors/:directorName", (req, res) => {
-  Movies.findOne({ "Director.Name": req.params.directorName })
-    .then(movie => {
-      res.json(movie.Director);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+app.get(
+  "/movies/directors/:directorName",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.findOne({ "Director.Name": req.params.directorName })
+      .then(movie => {
+        res.json(movie.Director);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 // Allow new users to register
 app.post(
@@ -179,6 +191,7 @@ app.put(
       .isEmpty(),
     check("Email", "Email does not appear to be valid").isEmail()
   ],
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -209,70 +222,86 @@ app.put(
 );
 
 //Return a list of user's favorite movies
-app.get("/users/:Username/favorites", (req, res) => {
-  Users.findOne({ Username: req.params.Username })
-    .then(user => {
-      res.json(user.FavoriteMovies);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+app.get(
+  "/users/:Username/favorites",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOne({ Username: req.params.Username })
+      .then(user => {
+        res.json(user.FavoriteMovies);
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 /*Allow users to add a movie to their list of favorites*/
-app.post("/users/:Username/movies/:MovieID", (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $push: { FavoriteMovies: req.params.MovieID }
-    },
-    { new: true }, // This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
+app.post(
+  "/users/:Username/movies/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $push: { FavoriteMovies: req.params.MovieID }
+      },
+      { new: true }, // This line makes sure that the updated document is returned
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        } else {
+          res.json(updatedUser);
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 // Allow users to remove a movie from their list of favorites
-app.delete("/users/:Username/movies/:MovieID", (req, res) => {
-  Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $pull: { FavoriteMovies: req.params.MovieID }
-    },
-    { new: true }, // This line makes sure that the updated document is returned
-    (err, updatedUser) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      } else {
-        res.json(updatedUser);
+app.delete(
+  "/users/:Username/movies/:MovieID",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $pull: { FavoriteMovies: req.params.MovieID }
+      },
+      { new: true }, // This line makes sure that the updated document is returned
+      (err, updatedUser) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("Error: " + err);
+        } else {
+          res.json(updatedUser);
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 //Allow existing users to deregister
-app.delete("/users/:Username", (req, res) => {
-  Users.findOneAndRemove({ Username: req.params.Username })
-    .then(user => {
-      if (!user) {
-        res.status(400).send(req.params.Username + " was not found");
-      } else {
-        res.status(200).send(req.params.Username + " was deleted.");
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+app.delete(
+  "/users/:Username",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Users.findOneAndRemove({ Username: req.params.Username })
+      .then(user => {
+        if (!user) {
+          res.status(400).send(req.params.Username + " was not found");
+        } else {
+          res.status(200).send(req.params.Username + " was deleted.");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
