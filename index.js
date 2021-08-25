@@ -174,6 +174,8 @@ app.post(
   }
 );
 
+/*hash submitted password*/
+let hashedPassword = Users.hashPassword(req.body.Password);
 // Allow users to update their user info (username)
 app.put(
   "/users/:Username",
