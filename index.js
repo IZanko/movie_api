@@ -174,8 +174,6 @@ app.post(
   }
 );
 
-/*hash submitted password*/
-let hashedPassword = Users.hashPassword(req.body.Password);
 // Allow users to update their user info (username)
 app.put(
   "/users/:Username",
@@ -200,6 +198,8 @@ app.put(
       return res.status(422).json({ errors: errors.array() });
     }
 
+    /*hash submitted password*/
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
