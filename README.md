@@ -1,14 +1,16 @@
-#myFlix
+**myFlix**
 
-##Project description:
+**Project description:**
 myFlix is a web application that provides users with access to information about different
 movies, directors, and genres. Users are able to sign up, update their
 personal information, and create a list of their favorite movies.
 
-##Web Application endpoints and uses:
+**Web Application endpoints and uses:**
 ![Endpoints Documentation](/public/images/endpoint_methods.PNG)
 
-##Project dependencies: {
+**Project dependencies:**
+
+```
 "bcrypt": "^5.0.1",
 "body-parser": "^1.19.0",
 "cors": "^2.8.5",
@@ -21,7 +23,7 @@ personal information, and create a list of their favorite movies.
 "passport-jwt": "^4.0.0",
 "passport-local": "^1.0.0",
 "uuid": "^8.3.2"
-}
+```
 
-##Public API URL:
+**Public API URL:**
 https://zanko-my-flix.herokuapp.com/
