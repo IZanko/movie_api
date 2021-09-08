@@ -56,20 +56,16 @@ require("./passport");
 let message = "";
 
 //  Return a list of ALL movies to the user
-app.get(
-  "/movies",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Movies.find()
-      .then(movie => {
-        res.json(movie);
-      })
-      .catch(err => {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
+app.get("/movies", function (req, res) {
+  Movies.find()
+    .then(function (movies) {
+      res.status(201).json(movies);
+    })
+    .catch(function (error) {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    });
+});
 
 // Return data about a single movie by title to the user
 app.get(
