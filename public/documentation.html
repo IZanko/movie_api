@@ -1,125 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Movies Api</title>
-  </head>
 
-  <body>
-    <header>
-      <h1>Documentation - Movies</h1>
-    </header>
-    <main>
-      <table style="width: 100%">
-        <tr>
-          <th>REQUEST</th>
-          <th>URL</th>
-          <th>HTTP METHOD</th>
-          <th>EXAMPLE REQUEST</th>
-          <th>RESPONSE</th>
-        </tr>
-        <tr>
-          <td>Return a list of ALL movies to the user</td>
-          <td>/movies</td>
-          <td>GET</td>
-          <td>/movies</td>
-          <td>A JSON object containing data of all movies</td>
-        </tr>
-        <tr>
-          <td>Return data about a single movie by title to the user</td>
-          <td>/movies/[title]</td>
-          <td>GET</td>
-          <td>/movies/The Dark Knight</td>
-          <td>A JSON object containing data of a single movie</td>
-        </tr>
-        <tr>
-          <td>
-            Return data about a genre (e.g.,“Thriller”)
-          </td>
-          <td>/movies/genre/[genre]</td>
-          <td>GET</td>
-          <td>/movies/genre/Thriller</td>
-          <td>
-            A JSON object describing the selected genre
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Return data about a director (bio, birth year, death year) by name
-          </td>
-          <td>/movies/directors/[director]</td>
-          <td>GET</td>
-          <td>/movies/directors/Christopher Nolan</td>
-          <td>A JSON object containing data of selected director</td>
-        </tr>
-        <tr>
-          <td>Allow new users to register</td>
-          <td>/users</td>
-          <td>POST</td>
-          <td>
-            /users <br />
-            Expecting: (JSON)<br />
-            { Username, Password, Email }
-          </td>
-          <td>a JSON object containing registered user's data</td>
-        </tr>
-        <tr>
-          <td>Allow users to login</td>
-          <td>/users/login</td>
-          <td>POST</td>
-          <td>/users/login</td>
-          <td>a JSON object containing registered user's data</td>
-        </tr>
-        <tr>
-          <td>Allow users to update their user info (username)</td>
-          <td>/users/[username]</td>
-          <td>PUT</td>
-          <td>
-            /users/noah <br />
-            Expecting: (JSON)<br />
-            { Username, Password, Email, Birthday }
-          </td>
-          <td>a JSON object displaying updated user information</td>
-        </tr>
-        <tr>
-          <td>Return a list of user's favorite movies</td>
-          <td>/users/[username]/favorites</td>
-          <td>GET</td>
-          <td>/users/noah/favorites</td>
-          <td>A JSON object containing IDs of all favorited movies</td>
-        </tr>
-        <tr>
-          <td>Allow users to add a movie to their list of favorites</td>
-          <td>/users/[user]/movies/[movie ID]</td>
-          <td>POST</td>
-          <td>/users/noah/movies/6113ff9d25e193d77c0c491e</td>
-          <td>
-            A JSON object containing the user's information including his/her
-            favorited movies
-          </td>
-        </tr>
-        <tr>
-          <td>Allow users to remove a movie from their list of favorites</td>
-          <td>/users/[user]/movies/[movie ID]</td>
-          <td>DELETE</td>
-          <td>/users/noah/movies/6113ff9d25e193d77c0c491e</td>
-          <td>
-            A JSON object containing the user's information including his/her
-            favorited movies
-          </td>
-        </tr>
-        <tr>
-          <td>Allow existing users to deregister</td>
-          <td>/users/[user]</td>
-          <td>DELETE</td>
-          <td>/users/noah</td>
-          <td>
-            [username] was deleted.
-          </td>
-        </tr>
-      </table>
-    </main>
-    <footer></footer>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movies Api</title>
+</head>
+
+<body>
+  <header>
+    <h1>Documentation - Movies</h1>
+  </header>
+  <main>
+    <table style="width: 100%">
+      <tr>
+        <th>REQUEST</th>
+        <th>URL</th>
+        <th>HTTP METHOD</th>
+        <th>EXAMPLE REQUEST</th>
+        <th>RESPONSE</th>
+      </tr>
+      <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>/movies</td>
+        <td>A JSON object containing data of all movies</td>
+      </tr>
+      <tr>
+        <td>Return data about a single movie by title to the user</td>
+        <td>/movies/[title]</td>
+        <td>GET</td>
+        <td>/movies/The Dark Knight</td>
+        <td>A JSON object containing data of a single movie</td>
+      </tr>
+      <tr>
+        <td>
+          Return data about a genre (e.g.,“Thriller”)
+        </td>
+        <td>/movies/genre/[genre]</td>
+        <td>GET</td>
+        <td>/movies/genre/Thriller</td>
+        <td>
+          A JSON object describing the selected genre
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Return data about a director (bio, birth year, death year) by name
+        </td>
+        <td>/movies/directors/[director]</td>
+        <td>GET</td>
+        <td>/movies/directors/Christopher Nolan</td>
+        <td>A JSON object containing data of selected director</td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>
+          /users <br />
+          Expecting: (JSON)<br />
+          { Username, Password, Email }
+        </td>
+        <td>a JSON object containing registered user's data</td>
+      </tr>
+      <tr>
+        <td>Allow users to login</td>
+        <td>/users/login</td>
+        <td>POST</td>
+        <td>/users/login</td>
+        <td>a JSON object containing registered user's data</td>
+      </tr>
+      <tr>
+        <td>Allow users to update their user info (username)</td>
+        <td>/users/[username]</td>
+        <td>PUT</td>
+        <td>
+          /users/noah <br />
+          Expecting: (JSON)<br />
+          { Username, Password, Email, Birthday }
+        </td>
+        <td>a JSON object displaying updated user information</td>
+      </tr>
+      <tr>
+        <td>Return registered user's info</td>
+        <td>/users/[username]</td>
+        <td>GET</td>
+        <td>
+          /users/noah <br />
+        </td>
+        <td>a JSON object displaying user information</td>
+      </tr>
+      <tr>
+        <td>Return a list of user's favorite movies</td>
+        <td>/users/[username]/favorites</td>
+        <td>GET</td>
+        <td>/users/noah/favorites</td>
+        <td>A JSON object containing IDs of all favorited movies</td>
+      </tr>
+      <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>/users/[user]/movies/[movie ID]</td>
+        <td>POST</td>
+        <td>/users/noah/movies/6113ff9d25e193d77c0c491e</td>
+        <td>
+          A JSON object containing the user's information including his/her
+          favorited movies
+        </td>
+      </tr>
+      <tr>
+        <td>Allow users to remove a movie from their list of favorites</td>
+        <td>/users/[user]/movies/[movie ID]</td>
+        <td>DELETE</td>
+        <td>/users/noah/movies/6113ff9d25e193d77c0c491e</td>
+        <td>
+          A JSON object containing the user's information including his/her
+          favorited movies
+        </td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/users/[user]</td>
+        <td>DELETE</td>
+        <td>/users/noah</td>
+        <td>
+          [username] was deleted.
+        </td>
+      </tr>
+    </table>
+  </main>
+  <footer></footer>
+</body>
+
 </html>
