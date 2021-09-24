@@ -88,9 +88,11 @@
         <td>/users/check/[username]</td>
         <td>GET</td>
         <td>
-          /users/check/noah <br />
+          /users/check/ <br />
+          Expecting: (JSON)<br />
+          { Username }
         </td>
-        <td>a JSON object displaying username, if username found, else, username is available</td>
+        <td>a message displaying whether username available or not</td>
       </tr>
       <tr>
         <td>Return registered user's info</td>
