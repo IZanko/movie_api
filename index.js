@@ -225,7 +225,7 @@ app.get(
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
-        res.json(user.Username + " exists!");
+        res.json(user);
       })
       .catch(err => {
         console.error(err);
