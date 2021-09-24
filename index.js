@@ -223,9 +223,9 @@ app.put(
 app.get(
   "/users/check/",
   (req, res) => {
-    Users.findOne({ Username: req.body.Username })
+    Users.findOne({ Username: req.params.Username })
       .then(user => {
-        user ? res.send(user.Username + " is already taken") : res.send(req.body.Username + " is available");
+        user ? res.send(user.Username + " is already taken") : res.send(req.params.Username + " is available");
       })
       .catch(err => {
         console.error(err);
