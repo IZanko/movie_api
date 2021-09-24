@@ -219,6 +219,21 @@ app.put(
   }
 );
 
+/*return username availability*/
+app.get(
+  "/users/check/:Username",
+  (req, res) => {
+    Users.findOne({ Username: req.params.Username })
+      .then(user => {
+        res.json(user.username + " exists!");
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
+
 //Return user's information
 app.get(
   "/users/:Username",
