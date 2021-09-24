@@ -221,9 +221,9 @@ app.put(
 
 /*return username availability*/
 app.get(
-  "/users/check/:Username",
+  "/users/check/",
   (req, res) => {
-    Users.findOne({ Username: req.params.Username })
+    Users.findOne({ Username: req.body.Username })
       .then(user => {
         res.json(user.Username + " exists!");
       })
