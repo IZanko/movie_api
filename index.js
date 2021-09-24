@@ -220,12 +220,12 @@ app.put(
 );
 
 /*return username availability*/
-app.get(
+app.put(
   "/users/check/",
   (req, res) => {
-    Users.findOne({ Username: req.params.Username })
+    Users.findOne({ Username: req.body.Username })
       .then(user => {
-        user ? res.send(user.Username + " is already taken") : res.send(req.params.Username + " is available");
+        user ? res.send(user.Username + " is already taken") : res.send(req.body.Username + " is available");
       })
       .catch(err => {
         console.error(err);
