@@ -225,7 +225,7 @@ app.get(
   (req, res) => {
     Users.findOne({ Username: req.body.Username })
       .then(user => {
-        user ? res(user.Username + " is already taken") : res(req.body.Username + " is available");
+        user ? res.send(user.Username + " is already taken") : res.send(req.body.Username + " is available");
       })
       .catch(err => {
         console.error(err);
