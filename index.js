@@ -221,7 +221,7 @@ app.put(
 
 /*return username availability*/
 app.get(
-  "/users/check/",
+  "/users/check/:Username",
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
