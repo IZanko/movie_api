@@ -269,7 +269,6 @@ app.get(
 /*Allow users to add a movie to their list of favorites*/
 app.post(
   "/users/:Username/movies/:MovieID",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -292,7 +291,6 @@ app.post(
 // Allow users to remove a movie from their list of favorites
 app.delete(
   "/users/:Username/movies/:MovieID",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
