@@ -268,13 +268,13 @@ app.get(
 
 /*Allow users to add a movie to their list of favorites*/
 app.post(
-  "/users/:Username/movies/",
+  "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $push: { FavoriteMovies: req.body.movieID }
+        $push: { FavoriteMovies: req.params.MovieID }
       },
       { new: true }, // This line makes sure that the updated document is returned
       (err, updatedUser) => {
@@ -291,13 +291,13 @@ app.post(
 
 // Allow users to remove a movie from their list of favorites
 app.delete(
-  "/users/:Username/movies/",
+  "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $pull: { FavoriteMovies: req.body.movieID }
+        $pull: { FavoriteMovies: req.params.MovieID }
       },
       { new: true }, // This line makes sure that the updated document is returned
       (err, updatedUser) => {
