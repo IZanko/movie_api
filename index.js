@@ -67,7 +67,7 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), function (r
     });
 });
 
-// Return data about a single movie by title to the user
+// Return data about a single movie by movieID to the user
 app.get(
   "/movies/:movieID",
   passport.authenticate("jwt", { session: false }),
