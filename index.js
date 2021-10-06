@@ -30,7 +30,7 @@ const app = express();
 app.use(bodyParser.json());
 
 /*Setting up Cross Origins Resource (CORS) sharing*/
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "http://localhost:1234"];
+let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "http://localhost:1234", "https://izanko-myflix-client.netlify.app/"];
 app.use(
   cors({
     origin: (origin, callback) => {
